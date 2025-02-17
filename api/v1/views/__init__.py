@@ -9,3 +9,4 @@ from api.v1.views.index import *
 from api.v1.views.states import *  # Import the new states view
 from api.v1.views.cities import *  # Import the new cities view
 from api.v1.views.amenities import *  # Import the amenities view
+from api.v1.views.users import *  # Import the users view
