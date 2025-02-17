@@ -11,3 +11,4 @@ from api.v1.views.cities import *  # Import the new cities view
 from api.v1.views.amenities import *  # Import the amenities view
 from api.v1.views.users import *  # Import the users view
 from api.v1.views.places import *  # Import the places  view
+from api.v1.views.places_reviews import *  # Import the places_reviews view
