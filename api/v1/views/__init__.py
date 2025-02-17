@@ -7,3 +7,4 @@ app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
 # Import views at the end to avoid circular imports
 from api.v1.views.index import *
 from api.v1.views.states import *  # Import the new states view
+from api.v1.views.cities import *  # Import the new cities view
