@@ -1,5 +1,4 @@
-# AirBnB Clone - API v1
-
+AirBnB Clone - API v1
 This directory contains version 1 of the AirBnB Clone API.
 
 ## Structure

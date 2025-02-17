@@ -1,8 +1,4 @@
-
----
-
-#### **API README.md (api/README.md)**  
-```markdown
+API README.md (api/README.md)  
 # AirBnB Clone - API
 
 This folder contains the Flask API implementation for the AirBnB Clone project.
