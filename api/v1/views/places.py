@@ -104,6 +104,60 @@ def update_place(place_id):
     return jsonify(place.to_dict()), 200
 
 
+@app.route('/api/v1/places_search', methods=['POST'])
+def places_search():
+    """Search for places based on states, cities, and amenities"""
+    # Step 1: Check if the body is valid JSON
+    if not request.is_json:
+        return jsonify({"error": "Not a JSON"}), 400
+
+    # Step 2: Parse the JSON body
+    filters = request.get_json()
+
+    states = filters.get("states", [])
+    cities = filters.get("cities", [])
+    amenities = filters.get("amenities", [])
+
+    # Step 3: Handle the case where there is no valid search data
+    places = storage.all(Place).values()
+
+    if not states and not cities and not amenities:
+        # No filters, return all places
+        return jsonify([place.to_dict() for place in places])
+
+    # Step 4: Apply the filter by states
+    if states:
+        state_places = []
+        for state_id in states:
+            state = storage.get(State, state_id)
+            if state:
+                for city in state.cities:
+                    # Add all places from the cities of the state
+                    state_places.extend(city.places)
+        places = set(state_places)  # Remove duplicates
+
+    # Step 5: Apply the filter by cities
+    if cities:
+        city_places = []
+        for city_id in cities:
+            city = storage.get(City, city_id)
+            if city:
+                city_places.extend(city.places)
+        # Combine with the state search results
+        places = set(places).union(set(city_places))
+
+    # Step 6: Apply the filter by amenities
+    if amenities:
+        amenity_filtered_places = []
+        for place in places:
+            if all(amenity in place.amenities for amenity in amenities):
+                amenity_filtered_places.append(place)
+        places = amenity_filtered_places
+
+    # Step 7: Return the final list of places
+    return jsonify([place.to_dict() for place in places])
+
+
 @app.teardown_appcontext
 def teardown(exc):
     """Closes the storage session after each request"""
