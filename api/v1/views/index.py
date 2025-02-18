@@ -1,8 +1,13 @@
 #!/usr/bin/python3
-"""Index view for the API"""
+"""
+Index view for the API.
+This module provides two endpoints:
+- `/status`: Returns the API status.
+- `/stats`: Returns the count of various objects.
+"""
 
-from flask import jsonify
 from api.v1.views import app_views
+from flask import jsonify
 from api.v1.views.index import *
 from models import storage
 from models.amenity import Amenity

@@ -1,5 +1,16 @@
 #!/usr/bin/python3
-"""Initialize Blueprint for API views"""
+"""Initialize Blueprint for API views
+This module creates a Flask Blueprint named 'app_views' with a URL prefix of /api/v1.
+It imports all the view modules required for handling different resources like:
+- Index
+- States
+- Cities
+- Amenities
+- Users
+- Places
+- Place Reviews
+- Place Amenities
+"""
 from flask import Blueprint
 
 # Create the app_views Blueprint with a URL prefix of /api/v1
