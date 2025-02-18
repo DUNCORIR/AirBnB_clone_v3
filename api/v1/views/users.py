@@ -2,6 +2,13 @@
 """User view for the API
 This module handles all default RESTful API actions for User objects,
 including creating, retrieving, updating, and deleting users.
+- GET /users: Retrieve all users.
+- GET /users/<user_id>: Retrieve a specific user by ID.
+- DELETE /users/<user_id>: Delete a user by ID.
+- POST /users: Create a new user.
+- PUT /users/<user_id>: Update a user by ID.
+
+The endpoints use Flask's `app_views` blueprint and the `storage` engine.
 
 """
 
@@ -13,7 +20,11 @@ from models.user import User
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
 def get_all_users():
-    """Retrieve the list of all User objects"""
+    """Retrieve the list of all User objects.
+
+    Returns:
+    Response: JSON list of all User objects with status 200.
+    """
     users = storage.all(User)  # Get all users
     return jsonify([user.to_dict() for user in users.values()])
 
