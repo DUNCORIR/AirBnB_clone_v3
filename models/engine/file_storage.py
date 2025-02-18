@@ -49,13 +49,16 @@ class FileStorage:
             json.dump(json_objects, f)
 
     def reload(self):
-        """deserializes the JSON file to __objects"""
+        """Deserializes the JSON file to __objects"""
         try:
             with open(self.__file_path, 'r') as f:
                 jo = json.load(f)
-            for key in jo:
-                self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
+            for key, value in jo.items():
+                self.__objects[key] = classes[value["__class__"]](**value)
         except FileNotFoundError:
+            pass
+        except ValueError:
+            # Handle invalid JSON content gracefully
             pass
 
     def delete(self, obj=None):
