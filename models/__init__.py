@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 """
-initialize the models package
+Module for initializing the models package.
+
+This module sets up the storage engine based on the environment configuration.
+It supports both FileStorage (for file-based storage)
+and DBStorage (for database storage).
 """
 
 from os import getenv
@@ -14,4 +18,5 @@ if storage_t == "db":
 else:
     from models.engine.file_storage import FileStorage
     storage = FileStorage()
+
 storage.reload()
