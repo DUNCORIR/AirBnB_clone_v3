@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""User view for the API"""
+"""User view for the API
+This module handles all default RESTful API actions for User objects,
+including creating, retrieving, updating, and deleting users.
+
+"""
 
 from flask import jsonify, request
 from api.v1.views import app_views
